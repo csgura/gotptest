@@ -18,14 +18,6 @@ type Func9[A1, A2, A3, A4, A5, A6, A7, A8, A9, R any] func(a1 A1, a2 A2, a3 A3, 
 
 type Func10[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, R any] func(a1 A1, a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10) R
 
-type Func11[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, R any] func(a1 A1, a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11) R
-
-type Func12[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, R any] func(a1 A1, a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12) R
-
-type Func13[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, R any] func(a1 A1, a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12, a13 A13) R
-
-type Func14[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, R any] func(a1 A1, a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12, a13 A13, a14 A14) R
-
 func (r Func2[A1, A2, R]) Curried() Func1[A1, Func1[A2, R]] {
 	return func(a1 A1) Func1[A2, R] {
 		return Func1[A2, R](func(a2 A2) R {
@@ -149,61 +141,5 @@ func (r Func10[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, R]) Curried() Func1[A1, 
 func (r Func10[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, R]) Shift() Func10[A2, A3, A4, A5, A6, A7, A8, A9, A10, A1, R] {
 	return func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a1 A1) R {
 		return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10)
-	}
-}
-
-func (r Func11[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, R]) Curried() Func1[A1, Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, R]]]]]]]]]]] {
-	return func(a1 A1) Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, R]]]]]]]]]] {
-		return Func10[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, R](func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11) R {
-			return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11)
-		}).Curried()
-	}
-}
-
-func (r Func11[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, R]) Shift() Func11[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A1, R] {
-	return func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a1 A1) R {
-		return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11)
-	}
-}
-
-func (r Func12[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, R]) Curried() Func1[A1, Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, Func1[A12, R]]]]]]]]]]]] {
-	return func(a1 A1) Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, Func1[A12, R]]]]]]]]]]] {
-		return Func11[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, R](func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12) R {
-			return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12)
-		}).Curried()
-	}
-}
-
-func (r Func12[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, R]) Shift() Func12[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A1, R] {
-	return func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12, a1 A1) R {
-		return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12)
-	}
-}
-
-func (r Func13[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, R]) Curried() Func1[A1, Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, Func1[A12, Func1[A13, R]]]]]]]]]]]]] {
-	return func(a1 A1) Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, Func1[A12, Func1[A13, R]]]]]]]]]]]] {
-		return Func12[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, R](func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12, a13 A13) R {
-			return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13)
-		}).Curried()
-	}
-}
-
-func (r Func13[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, R]) Shift() Func13[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A1, R] {
-	return func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12, a13 A13, a1 A1) R {
-		return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13)
-	}
-}
-
-func (r Func14[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, R]) Curried() Func1[A1, Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, Func1[A12, Func1[A13, Func1[A14, R]]]]]]]]]]]]]] {
-	return func(a1 A1) Func1[A2, Func1[A3, Func1[A4, Func1[A5, Func1[A6, Func1[A7, Func1[A8, Func1[A9, Func1[A10, Func1[A11, Func1[A12, Func1[A13, Func1[A14, R]]]]]]]]]]]]] {
-		return Func13[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, R](func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12, a13 A13, a14 A14) R {
-			return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14)
-		}).Curried()
-	}
-}
-
-func (r Func14[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, R]) Shift() Func14[A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A1, R] {
-	return func(a2 A2, a3 A3, a4 A4, a5 A5, a6 A6, a7 A7, a8 A8, a9 A9, a10 A10, a11 A11, a12 A12, a13 A13, a14 A14, a1 A1) R {
-		return r(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14)
 	}
 }
