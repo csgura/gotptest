@@ -6,16 +6,22 @@ import (
 	"gotptest/option"
 )
 
-func MakeURLWithPort(scheme, addr string, port int) string {
-	return fmt.Sprintf("%s://%s:%d", scheme, addr, port)
+type hello struct {
+}
+
+func (r hello) String() string {
+	return "hello"
 }
 
 func main() {
+	v := option.Some(hello{})
+	_ = v
 
-	resOpt := option.Applicative3(MakeURLWithPort).
-		ApOption(option.Some("https")).
-		Shift().
-		Ap(8443).
-		Ap("localhost")
-	fmt.Println(resOpt)
+	res := option.Applicative2(func(a int, b int) int {
+		fmt.Println(a, b)
+		return 10
+	}).
+		Ap(1).
+		Ap(20)
+	fmt.Println(res)
 }

@@ -1,3 +1,3 @@
 package maxproduct
 
-const MaxProduct = 11
+const MaxProduct = 3

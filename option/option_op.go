@@ -3,6 +3,7 @@ package option
 
 import (
 	"gotptest/fp"
+	"gotptest/hlist"
 )
 
 func Some[T any](v T) fp.Option[T] {
@@ -36,20 +37,19 @@ func FlatMap[T, U any](opt fp.Option[T], fn func(v T) fp.Option[U]) fp.Option[U]
 	return None[U]()
 }
 
-type ApplicativeFunctor1[HT,A, R any] struct {
-	h  fp.Option[HT]
+type ApplicativeFunctor1[H hlist.Header[HT], HT, A, R any] struct {
+	h  fp.Option[H]
 	fn fp.Option[fp.Func1[A, R]]
 }
 
-
-func (r ApplicativeFunctor1[HT,A, R]) ApOption(a fp.Option[A]) fp.Option[R] {
+func (r ApplicativeFunctor1[H, HT, A, R]) ApOption(a fp.Option[A]) fp.Option[R] {
 	return Ap(r.fn, a)
 }
 
-func (r ApplicativeFunctor1[HT,A, R]) Ap(a A) fp.Option[R] {
+func (r ApplicativeFunctor1[H, HT, A, R]) Ap(a A) fp.Option[R] {
 	return r.ApOption(Some(a))
 }
 
-func Applicative1[A, R any](fn fp.Func1[A, R]) ApplicativeFunctor1[fp.Unit, A, R] {
-	return ApplicativeFunctor1[fp.Unit, A, R]{None[fp.Unit](), Some(fn)}
+func Applicative1[A, R any](fn fp.Func1[A, R]) ApplicativeFunctor1[hlist.Nil, hlist.Nil, A, R] {
+	return ApplicativeFunctor1[hlist.Nil, hlist.Nil, A, R]{Some(hlist.Empty()), Some(fn)}
 }
